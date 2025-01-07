@@ -3,9 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -42,61 +39,51 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-100 to-white">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Register for FlowQi</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Confirm Password
-              </label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">
-              Register
-            </Button>
-          </form>
-          <div className="text-center mt-4">
-            <Link href="/login" className="text-blue-500 hover:text-blue-700">
-              Already have an account? Log in
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+        <h1 className="text-4xl font-bold mb-8">Register for FlowQi</h1>
+        <form onSubmit={handleSubmit} className="w-full max-w-xs">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+            className="w-full px-3 py-2 mb-4 text-gray-700 border rounded-lg focus:outline-none"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+            className="w-full px-3 py-2 mb-4 text-gray-700 border rounded-lg focus:outline-none"
+          />
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            required
+            className="w-full px-3 py-2 mb-4 text-gray-700 border rounded-lg focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="w-full px-3 py-2 text-white bg-green-500 rounded-lg focus:outline-none hover:bg-green-600"
+          >
+            Register
+          </button>
+        </form>
+        {error && (
+          <div className="text-red-500 text-sm text-center mt-4">{error}</div>
+        )}
+        <div className="text-center mt-4">
+          <Link href="/login" className="font-medium text-blue-500 hover:text-blue-600">
+            Already have an account? Log in
+          </Link>
+        </div>
+      </main>
     </div>
   );
 }
+
